@@ -54,3 +54,29 @@ const getInfoArrow = () => ({
 });
 
 console.log(getInfoArrow());
+
+// Exemple POUR this -- Problème de this sans arrow function.
+
+const incrimentN = {
+  number: 100,
+  increment: function () {
+    setTimeout(
+      function () {
+        console.log((this.number += 1));
+      }.bind(this),
+      1000
+    );
+  },
+};
+
+incrimentN.increment(); // Affiche dans la console en haut NaN et pour qu'il connais this on doit mettre bind.
+
+const incrimentNArrow = {
+  number: 100,
+  increment() {
+    setTimeout(() => {
+      console.log((this.number += 1));
+    }, 1000);
+  },
+};
+incrimentNArrow.increment();
